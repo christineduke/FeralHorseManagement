@@ -171,3 +171,25 @@ hist(Nordegg,col="grey", labels=T, breaks=7,
      xlab = "Observations", ylab = "Number of Individuals")
 hist(Brazeau,col="grey", labels=T, breaks=7, 
      xlab = "Observations", ylab = "Number of Individuals")
+
+par(mfrow=c(3, 3))
+hist(Cutblock, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Conifer, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Deciduous, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Mixedwood,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Grassland,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Riparian,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+
+par(mfrow=c(2,2))
+hist(Shrub, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Industrial,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Roadside,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
