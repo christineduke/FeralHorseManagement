@@ -2,7 +2,7 @@
 Files and other nonsense for REN R 476
 
 
-A project in fulfillment of REN R 476: Advanced Fisheries and Wildlife Management - Macs MacLeod
+A term project in fulfillment of REN R 476: Advanced Fisheries and Wildlife Management - Guidance from Macs MacLeod
 
 
 Data Source
