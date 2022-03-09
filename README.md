@@ -1,5 +1,5 @@
 # FeralHorseManagement
-Code and other such nonsense for REN R 476
+Files and other nonsense for REN R 476
 
 
 A project in fulfillment of REN R 476: Advanced Fisheries and Wildlife Management - Macs MacLeod
