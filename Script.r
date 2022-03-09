@@ -163,3 +163,17 @@ Nordegg <- c(CutblockNordegg,IndustrialNordegg,GrasslandNordegg,
 Brazeau <- c(IndustrialBrazeau)
 
 # Figure time BABEE
+
+par(mfrow=c(3, 3))
+hist(Ghost, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Elbow, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Sundre, col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Clearwater,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Nordegg,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
+hist(Brazeau,col="grey", labels=T, breaks=7, 
+     xlab = "Observations", ylab = "Number of Individuals")
