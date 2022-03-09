@@ -1,4 +1,4 @@
-setwd("C:/Users/chris/OneDrive/Documents/School/Current Courses/2. Winter 2022/REN R 476/Term Project")
+setwd()
 library(rstan)
 library(blmeco)
 library(tidyverse)
