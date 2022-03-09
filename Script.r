@@ -1,13 +1,9 @@
 # Very clunky first attempt so please take with a giant cube of salt
 
 setwd()
-library(rstan)
-library(blmeco)
-library(tidyverse)
+library(rstan);library(blmeco);library(tidyverse)
 
 dat1 <- read.csv("FeralHorse1.csv")
-dat3 <- read.csv("FeralHorsePop.csv")
-
 View(dat1)
 
 # Analysis for FeralHorse1
@@ -66,23 +62,16 @@ cat("
 sink()
 
 plot(dat1, ylim=c(0,21), xlim=c(1, 102))
-traceplot(dat1, "a0")
+traceplot(dat1, "a0", ylim=c(0,21, xlim=c(1,102))
 
-# Analysis for dat2
-
-dat2 <- read.csv("FeralHorse2.csv")
-head(dat2);str(dat2)
-attach(dat2)
-View(dat2)
-
-# Let's use the abbreviated dataset now, see what we can see stats wise!
+# Let's use the abbreviated dataset now
 
 dat4 <- read.csv("FeralHorsesAbbrev.csv")
 View(dat4)
 head(dat4);str(dat4)
 attach(dat4)
 
-# Letz make V E C T O R S 4 tha population boyo BUT FIRST. we subset
+# Letz make V E C T O R S 4 tha population boyo
 
 CutblockSundre <- c(3,6,4,6,3,9,10,2,13,9,9,3,3,2,4,4,3,10,9,4,3,7,
                     10,15,5,3,6,3,2,7,4,7,6,3,5,2,3,3,4,6,7,6,6,2,
