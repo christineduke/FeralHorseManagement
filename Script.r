@@ -127,23 +127,39 @@ RoadsideClearwater <- c(5,2,9)
 
 # By habitat
 
-Cutblock <- c(CutblockElbow,CutblockGhost,CutblockNordegg,CutblockSundre)
-Conifer <- c(ConiferClearwater,ConiferGhost,ConiferSundre)
-Deciduous <- c(DeciduousElbow,DeciduousGhost,DeciduousSundre)
-Mixedwood <- c(MixedwoodClearwater,MixedwoodElbow,MixedwoodGhost,MixedwoodSundre)
-Industrial <- c(IndustrialBrazeau,IndustrialClearwater,IndustrialGhost,IndustrialNordegg,IndustrialSundre)
-Grassland <- c(GrasslandClearwater,GrasslandGhost,GrasslandSundre,GrasslandNordegg)
-Riparian <- c(RiparianClearwater,RiparianElbow,RiparianGhost,RiparianNordegg,RiparianSundre)
-Shrub <- c(ShrubClearwater,ShrubNordegg,ShrubSundre,ShrubGhost)
+Cutblock <- c(CutblockElbow,CutblockGhost,
+              CutblockNordegg,CutblockSundre)
+Conifer <- c(ConiferClearwater,ConiferGhost,
+             ConiferSundre)
+Deciduous <- c(DeciduousElbow,DeciduousGhost,
+               DeciduousSundre)
+Mixedwood <- c(MixedwoodClearwater,MixedwoodElbow,
+               MixedwoodGhost,MixedwoodSundre)
+Industrial <- c(IndustrialBrazeau,IndustrialClearwater,
+                IndustrialGhost,IndustrialNordegg,
+                IndustrialSundre)
+Grassland <- c(GrasslandClearwater,GrasslandGhost,
+               GrasslandSundre,GrasslandNordegg)
+Riparian <- c(RiparianClearwater,RiparianElbow,
+              RiparianGhost,RiparianNordegg,
+              RiparianSundre)
+Shrub <- c(ShrubClearwater,ShrubNordegg,
+           ShrubSundre,ShrubGhost)
 Roadside <- c(RoadsideSundre,RoadsideClearwater)
 
 # By Equine Zone
 
-Ghost <- c(CutblockGhost,ConiferGhost,DeciduousGhost,MixedwoodGhost,IndustrialGhost,GrasslandGhost,RiparianGhost,ShrubGhost)
+Ghost <- c(CutblockGhost,ConiferGhost,DeciduousGhost,MixedwoodGhost,
+           IndustrialGhost,GrasslandGhost,RiparianGhost,ShrubGhost)
 Elbow <- c(CutblockElbow,DeciduousElbow,MixedwoodElbow,RiparianElbow)
-Sundre <- c(CutblockSundre,ConiferSundre,DeciduousSundre,MixedwoodSundre,IndustrialSundre,GrasslandSundre,RiparianSundre,ShrubSundre,RoadsideSundre)
-Clearwater <- c(ConiferClearwater,MixedwoodClearwater,IndustrialClearwater,GrasslandClearwater,RiparianClearwater,ShrubClearwater,RoadsideClearwater)
-Nordegg <- c(CutblockNordegg,IndustrialNordegg,GrasslandNordegg,RiparianNordegg,ShrubNordegg)
+Sundre <- c(CutblockSundre,ConiferSundre,DeciduousSundre,MixedwoodSundre,
+            IndustrialSundre,GrasslandSundre,RiparianSundre,ShrubSundre,
+            RoadsideSundre)
+Clearwater <- c(ConiferClearwater,MixedwoodClearwater,IndustrialClearwater,
+                GrasslandClearwater,RiparianClearwater,ShrubClearwater,
+                RoadsideClearwater)
+Nordegg <- c(CutblockNordegg,IndustrialNordegg,GrasslandNordegg,
+             RiparianNordegg,ShrubNordegg)
 Brazeau <- c(IndustrialBrazeau)
 
 # Figure time BABEE
