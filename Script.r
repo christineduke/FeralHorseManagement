@@ -1,3 +1,5 @@
+# Very clunky first attempt so please take with a giant cube of salt
+
 setwd()
 library(rstan)
 library(blmeco)
