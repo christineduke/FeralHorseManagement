@@ -202,3 +202,11 @@ anova2 <- aov(total~equine_zone)
 anova2
 TukeyHSD(anova1)
 TukeyHSD(anova2)
+
+          # Significant differences
+# Habitat - none
+# Equine Zones - ELBOW RIVER EQUINE ZONE-BRAZEAU EQUINE ZONE (0.02)
+#                ELBOW RIVER EQUINE ZONE-CLEARWATER EQUINE ZONE (0.01)   
+#                GHOST RIVER EQUINE ZONE-ELBOW RIVER EQUINE ZONE (0.02)
+#                NORDEGG EQUINE ZONE-ELBOW RIVER EQUINE ZONE (0.007)
+#                SUNDRE EQUINE ZONE-ELBOW RIVER EQUINE ZONE (0.004)
