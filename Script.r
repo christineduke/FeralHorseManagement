@@ -193,3 +193,12 @@ hist(Industrial,col="grey", labels=T, breaks=7,
      xlab = "Observations", ylab = "Number of Individuals")
 hist(Roadside,col="grey", labels=T, breaks=7, 
      xlab = "Observations", ylab = "Number of Individuals")
+
+# Stats, start looking for differences between habitats and equine zones
+
+anova1 <- aov(total~habitat)
+anova1
+anova2 <- aov(total~equine_zone)
+anova2
+TukeyHSD(anova1)
+TukeyHSD(anova2)
