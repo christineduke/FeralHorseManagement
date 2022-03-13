@@ -1,77 +1,53 @@
-# Very clunky first attempt so please take with a giant cube of salt
+# We will be excluding foals from the analysis as there is only 1 observation, and as such is not significant in any stats through all equine zones and habitats
 
 setwd()
 library(rstan);library(blmeco);library(tidyverse)
 
-dat1 <- read.csv("FeralHorse1.csv")
+dat1 <- read.csv("FeralHorsesAbbrev.csv")
 View(dat1)
-
-# Analysis for FeralHorse1
-
 head(dat1);str(dat1)
 attach(dat1)
 
-sink("dat1")
-cat("
-    dat1 {
-    int<lower=0> N; //Number of Sites
-    int<lower=1> J; //Number of Replicates at each site
-    int<lower=0, upper=21> y[N, J]; //Detection at Each site on each sampling rep
-    int<lower=0, upper=21> x[N]; //Observed occupancy at each site
-    real DataDate[N, J];
-    }
-    
-    parameters {
-    real a0; //specifying regression parameters
-    real b0;
-    real b1;
-    real b2
-    }
-    
-    transformed parameters {
-    real<lower=0,upper=21> psi[N];
-    real<lower=0,upper=1> p[N, J];
-    for(i in 21:N) {
-    psi[i] = inv_logit(a0); //intercept-only model for occupancy
-    for(j in 21:J) {
-    p[i, j] = inv_logit(b0 + b1*DataDate[i, j] + b2*DataDate[i, j]*DataDate[i, j]; //Detection probability on inverse logit
-    }
-    }
-    }
-    
-    model {
-    // Priors
-    a0 ~ normal(0,5);
-    b0 ~ normal(0,5);
-    b1 ~ normal(0,5);
-    b2 ~ normal(0,5);
-    
-    // likelihood
-    for(i in 1:N) {
-    if(x[i]==1) {
-    1 ~ bernoulli(psi[i]);
-    y[i] ~ bernoulli(p[i];
-    }
-    if(x[i]==0) {
-    increment_log_prob(log_sum_exp(log(psi[i]) + loglm(p[i,1]) + loglm(p[i,2]) + loglm(p[i,3]) + loglm(p[i,4]) + loglm(p[i,5]) + loglm(p[i,6]), loglm(psi[i]))); //?
-    }
-    }
-    }
-    
-    ",fill = TRUE)
-sink()
+# Look for significant differences between Equine Zones and occupancy rates
 
-plot(dat1, ylim=c(0,21), xlim=c(1, 102))
-traceplot(dat1, "a0", ylim=c(0,21, xlim=c(1,102))
+anova1 <- aov(total~habitat)
+anova1
+TukeyHSD(anova1)
+anova2 <- aov(total~equine_zone)
+anova2
+TukeyHSD(anova2)
 
-# Let's use the abbreviated dataset now
+sadult_Pop <- aov(s_adult ~ habitat)
+sadult_Pop
+TukeyHSD(sadult_Pop)
 
-dat4 <- read.csv("FeralHorsesAbbrev.csv")
-View(dat4)
-head(dat4);str(dat4)
-attach(dat4)
+sadult_Pop2 <- aov(s_adult ~ equine_zone)
+sadult_Pop2
+TukeyHSD(sadult_Pop2)
 
-# Letz make V E C T O R S 4 tha population boyo
+adult_Pop <- aov(adult ~ habitat)
+adult_Pop
+TukeyHSD(adult_Pop)
+
+adult_Pop2 <- aov(adult ~ equine_zone)
+adult_Pop2
+TukeyHSD(adult_Pop2)
+
+# Differences
+
+# Habitat - Riparian - Cutblock (0.8)
+#           Riparian - Industrial (0.4)
+#           Riparian - Grassland (0.6)
+#           Riparian seems to be the most different, not too shocking
+
+# Equine Zones - Ghost Equine Zone - Elbow Equine Zone (0.8)
+#                Sundre Equine Zone - Elbow Equine Zone (0.8)
+#                Ghost - Elbow - Sundre Zones exhibit the greatest differences (not super 
+#                significant but HEY it's a difference)
+
+# Create vectors for figures
+
+# By habitats within zones
 
 CutblockSundre <- c(3,6,4,6,3,9,10,2,13,9,9,3,3,2,4,4,3,10,9,4,3,7,
                     10,15,5,3,6,3,2,7,4,7,6,3,5,2,3,3,4,6,7,6,6,2,
@@ -119,7 +95,7 @@ ShrubNordegg <- c(3)
 RoadsideSundre <- c(6,8)
 RoadsideClearwater <- c(5,2,9)
 
-# By habitat
+# By overall habitat
 
 Cutblock <- c(CutblockElbow,CutblockGhost,
               CutblockNordegg,CutblockSundre)
@@ -156,56 +132,65 @@ Nordegg <- c(CutblockNordegg,IndustrialNordegg,GrasslandNordegg,
              RiparianNordegg,ShrubNordegg)
 Brazeau <- c(IndustrialBrazeau)
 
-# Figure time BABEE
+
+# Generate basic visualizations
 
 par(mfrow=c(3, 3))
-hist(Ghost, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Elbow, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Sundre, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Clearwater,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Nordegg,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Brazeau,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
+hist(Ghost, col="grey", labels=T,
+     main = "Ghost River Equine Zone", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Elbow, col="grey", labels=T,
+     main = "Elbow River Equine Zone", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Sundre, col="grey", labels=T,
+     main = "Sundre Equine Zone", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Clearwater,col="grey", labels=T,
+     main = "Clearwater Equine Zone", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Nordegg,col="grey", labels=T,
+     main = "Nordegg Equine Zone", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Brazeau,col="grey", labels=T,
+     main = "Brazeau Equine Zone", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
 
 par(mfrow=c(3, 3))
-hist(Cutblock, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Conifer, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Deciduous, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Mixedwood,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Grassland,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Riparian,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
+hist(Cutblock, col="grey", labels=T,
+     main = "Cutblock Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Conifer, col="grey", labels=T,
+     main = "Conifer Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Deciduous, col="grey", labels=T,
+     main = "Deciduous Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Mixedwood,col="grey", labels=T,
+     main = "Mixedwood Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Grassland,col="grey", labels=T, 
+     main = "Grassland Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Riparian,col="grey", labels=T, 
+     main = "Riparian Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
 
 par(mfrow=c(2,2))
-hist(Shrub, col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Industrial,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
-hist(Roadside,col="grey", labels=T, breaks=7, 
-     xlab = "Observations", ylab = "Number of Individuals")
+hist(Shrub, col="grey", labels=T, 
+     main = "Shrub Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Industrial,col="grey", labels=T, 
+     main = "Industrial Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(Roadside,col="grey", labels=T, 
+     main = "Roadside Habitat", 
+     xlab = "Observation Range", ylab = "Number of Individuals")
+hist(total, col="grey", labels=T,
+     main = "Total Counts of Horses in all Equine Zones during the Survey",
+     xlab = "Observation Range", ylab = "Number of Individuals")
 
-# Stats, start looking for differences between habitats and equine zones
 
-anova1 <- aov(total~habitat)
-anova1
-anova2 <- aov(total~equine_zone)
-anova2
-TukeyHSD(anova1)
-TukeyHSD(anova2)
+# Most adults and sub-adults occur in Riparian and Cutblock habitats in Sundre
 
-          # Significant differences
-# Equine Zones - ELBOW RIVER EQUINE ZONE-BRAZEAU EQUINE ZONE (0.02)
-#                ELBOW RIVER EQUINE ZONE-CLEARWATER EQUINE ZONE (0.01)   
-#                GHOST RIVER EQUINE ZONE-ELBOW RIVER EQUINE ZONE (0.02)
-#                NORDEGG EQUINE ZONE-ELBOW RIVER EQUINE ZONE (0.007)
-#                SUNDRE EQUINE ZONE-ELBOW RIVER EQUINE ZONE (0.004)
+# Sundre is the zone with the most occurrences of individuals within the survey, with most sub-adult detections occurring within the Sundre Cutblock habitat type, 
+# followed by adults in Sundre Riparian
