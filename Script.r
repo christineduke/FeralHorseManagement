@@ -1,7 +1,6 @@
-# We will be excluding foals from the analysis as there is only 1 observation, and as such 
-# is not significant in any stats through all equine zones and habitats
+# We will be excluding foals from the analysis as there is only 1 observation, and as such is not significant in any stats through all equine zones and habitats
 
-setwd("C:/Users/chris/OneDrive/Documents/School/Current Courses/2. Winter 2022/REN R 476/Term Project")
+setwd()
 library(rstan);library(blmeco)
 library(tidyverse)
 
