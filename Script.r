@@ -1,7 +1,9 @@
-# We will be excluding foals from the analysis as there is only 1 observation, and as such is not significant in any stats through all equine zones and habitats
+# We will be excluding foals from the analysis as there is only 1 observation, and as such 
+# is not significant in any stats through all equine zones and habitats
 
-setwd()
-library(rstan);library(blmeco);library(tidyverse)
+setwd("C:/Users/chris/OneDrive/Documents/School/Current Courses/2. Winter 2022/REN R 476/Term Project")
+library(rstan);library(blmeco)
+library(tidyverse)
 
 dat1 <- read.csv("FeralHorsesAbbrev.csv")
 View(dat1)
@@ -33,7 +35,45 @@ adult_Pop2 <- aov(adult ~ equine_zone)
 adult_Pop2
 TukeyHSD(adult_Pop2)
 
-# Differences
+# Export Results
+
+summary(anova1)
+T_anova1 <- TukeyHSD(anova1)
+TK <-(T_anova1)
+TK_data<-as.data.frame(TK[1])
+write.csv(TK_data, 'TotalCount_Habitat.csv')
+
+summary(anova2)
+T_anova2 <- TukeyHSD(anova2)
+TK2 <- (T_anova2)
+TK_data2 <- as.data.frame(TK2[1])
+write.csv(TK_data2, 'TotalCount_Zone.csv')
+
+summary(sadult_Pop)
+T_anova3 <- TukeyHSD(sadult_Pop)
+TK3 <- (T_anova3)
+TK_data3 <- as.data.frame(TK3[1])
+write.csv(TK_data3, 'Subadult_Habitat.csv')
+
+summary(sadult_Pop2)
+T_anova4 <- TukeyHSD(sadult_Pop2)
+TK4 <- (T_anova4)
+TK_data4 <- as.data.frame(TK4[1])
+write.csv(TK_data4, 'Subadult_Zone.csv')
+
+summary(adult_Pop)
+T_anova5 <- TukeyHSD(adult_Pop)
+TK5 <- (T_anova5)
+TK_data5 <- as.data.frame(TK5[1])
+write.csv(TK_data5, 'Adult_Habitat.csv')
+
+summary(adult_Pop2)
+T_anova6 <- TukeyHSD(adult_Pop2)
+TK6 <- (T_anova6)
+TK_data6 <- as.data.frame(TK6[1])
+write.csv(TK_data6, 'Adult_Zone.csv')
+
+# Look at some differences
 
 # Habitat - Riparian - Cutblock (0.8)
 #           Riparian - Industrial (0.4)
@@ -192,5 +232,5 @@ hist(total, col="grey", labels=T,
 
 # Most adults and sub-adults occur in Riparian and Cutblock habitats in Sundre
 
-# Sundre is the zone with the most occurrences of individuals within the survey, with most sub-adult detections occurring within the Sundre Cutblock habitat type, 
-# followed by adults in Sundre Riparian
+# Sundre is the zone with the most occurrences of individuals within the survey, with mostsub-adult detections occurring within the Cutblock habitat type, 
+# followed by adults in Riparian
