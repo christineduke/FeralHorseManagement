@@ -233,3 +233,36 @@ hist(total, col="grey", labels=T,
 
 # Sundre is the zone with the most occurrences of individuals within the survey, with mostsub-adult detections occurring within the Cutblock habitat type, 
 # followed by adults in Riparian
+
+
+# Basic look at population growth rates
+
+dat2 <- read.csv("FeralHorsePop.csv")
+View(dat2)
+attach(dat2)
+
+growth_rate = dat2 %>%
+        # first sort by year
+        arrange(Year) %>%
+        mutate(Diff_Year = Year - lag(Year),  # Difference in time (just in case there are gaps)
+               Diff_growth = Minimum.Horse.Count - lag(Minimum.Horse.Count), # Difference in route between years
+               Rate_percent = (Diff_growth / Diff_Year)/Minimum.Horse.Count * 100) # growth rate in percent
+growth_rate
+write.csv(growth_rate, 'GrowthRate_Overall.csv')
+
+dat3 <- read.csv("GrowthRate_Overall.csv")
+
+library(dplyr)
+library(reshape2)
+library(ggplot2)
+library(growthcurver)
+library(purrr)
+
+ggplot(dat3, aes(x = Year, y = Minimum.Horse.Count)) + geom_point(alpha=0.7)
+
+model <- SummarizeGrowth(dat3$Year, dat3$Minimum.Horse.Count)
+model$vals
+
+par(mar=c(5,4,4,2))
+plot(model,col="grey",
+     xlab="Year", ylab="Minimum  Horse  Count (# of individuals)")
