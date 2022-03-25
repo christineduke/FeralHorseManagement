@@ -266,3 +266,24 @@ model$vals
 par(mar=c(5,4,4,2))
 plot(model,col="grey",
      xlab="Year", ylab="Minimum  Horse  Count (# of individuals)")
+
+
+# Summary of counts
+
+dat1 %>%
+        group_by(equine_zone) %>%
+        summarize(total = sum(total))
+
+dat1 %>%
+        group_by(habitat) %>%
+        summarize(total = sum(total))
+
+dat1 %>%
+        group_by(habitat) %>%
+        summarize(total = sum(adult))
+dat1 %>%
+        group_by(habitat) %>%
+        summarize(total = sum(s_adult))
+dat1 %>%
+        group_by(habitat) %>%
+        summarize(total = sum(foal))
